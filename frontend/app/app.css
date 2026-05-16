@@ -1,0 +1,293 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  background:
+    linear-gradient(180deg, rgba(238, 242, 255, 0.75), transparent 320px),
+    #f7f8fb;
+  color: #172033;
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: light;
+  }
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.translator-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 48px 0;
+}
+
+.translator-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #536079;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.translator-header h1 {
+  margin: 0;
+  color: #111827;
+  font-size: clamp(2rem, 5vw, 4.4rem);
+  font-weight: 800;
+  line-height: 0.95;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid #d8deea;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #39445b;
+  font-size: 0.9rem;
+  font-weight: 650;
+  white-space: nowrap;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+.status-pill span {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: #93a0b5;
+}
+
+.status-ready span {
+  background: #12805c;
+}
+
+.status-missing span,
+.status-error span {
+  background: #c2410c;
+}
+
+.status-checking span {
+  background: #2563eb;
+}
+
+.translator-workspace {
+  border: 1px solid #d7deea;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.1);
+  overflow: hidden;
+}
+
+.language-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid #e2e7f0;
+  background: #f8fafc;
+}
+
+.language-tab,
+.swap-button {
+  min-height: 38px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: #475569;
+  font-weight: 700;
+}
+
+.language-tab {
+  padding: 0 14px;
+}
+
+.language-tab.active {
+  border-color: #cbd5e1;
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+}
+
+.swap-button {
+  margin-left: auto;
+  padding: 0 12px;
+  border-color: #cbd5e1;
+  background: #ffffff;
+}
+
+.translation-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 430px;
+}
+
+.translation-panel {
+  display: flex;
+  min-width: 0;
+  min-height: 430px;
+  flex-direction: column;
+  border-right: 1px solid #e2e7f0;
+}
+
+.translation-panel:last-child {
+  border-right: 0;
+}
+
+.panel-label {
+  padding: 18px 20px 0;
+  color: #536079;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.translation-panel textarea,
+.translation-output {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  padding: 18px 20px 24px;
+  border: 0;
+  outline: 0;
+  color: #111827;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.translation-panel textarea {
+  resize: none;
+  background: transparent;
+}
+
+.translation-panel textarea::placeholder {
+  color: #94a3b8;
+}
+
+.output-panel {
+  background: #fbfcff;
+}
+
+.translation-output {
+  white-space: pre-wrap;
+}
+
+.empty-output {
+  color: #94a3b8;
+}
+
+.action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-top: 1px solid #e2e7f0;
+  background: #ffffff;
+}
+
+.model-summary {
+  color: #64748b;
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.translate-button {
+  min-width: 150px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 7px;
+  background: #172033;
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 12px 24px rgba(23, 32, 51, 0.2);
+}
+
+.translate-button:disabled {
+  background: #cbd5e1;
+  box-shadow: none;
+}
+
+.error-message {
+  margin: 0;
+  padding: 14px 16px;
+  border-top: 1px solid #fed7aa;
+  background: #fff7ed;
+  color: #9a3412;
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+@media (max-width: 760px) {
+  .translator-shell {
+    width: min(100% - 20px, 1180px);
+    padding: 24px 0;
+  }
+
+  .translator-header {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .status-pill {
+    white-space: normal;
+  }
+
+  .language-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .swap-button {
+    margin-left: 0;
+  }
+
+  .translation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .translation-panel {
+    min-height: 300px;
+    border-right: 0;
+    border-bottom: 1px solid #e2e7f0;
+  }
+
+  .translation-panel:last-child {
+    border-bottom: 0;
+  }
+
+  .action-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .translate-button {
+    width: 100%;
+  }
+}

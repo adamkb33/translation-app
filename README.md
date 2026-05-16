@@ -1,87 +1,55 @@
-# Welcome to React Router!
+# Translation App
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Offline-first English/Russian translation app.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Structure
 
-## Features
+- `frontend/` - React Router UI.
+- `backend/` - Local FastAPI translation API.
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## Development
 
-## Getting Started
-
-### Installation
-
-Install the dependencies:
+Frontend:
 
 ```bash
-npm install
+npm --prefix frontend install
+npm run dev:frontend
 ```
 
-### Development
-
-Start the development server with HMR:
+Backend:
 
 ```bash
-npm run dev
+python -m venv .venv
+source .venv/bin/activate
+pip install -r backend/requirements.txt
+npm run dev:backend
 ```
 
-Your application will be available at `http://localhost:5173`.
+## Offline Model Preparation
 
-## Building for Production
-
-Create a production build:
+Run once while online:
 
 ```bash
-npm run build
+pip install -r backend/requirements-models.txt
+bash backend/scripts/prepare_models.sh
 ```
 
-## Deployment
+This downloads and converts the OPUS-MT models into `backend/models/`. Runtime translation uses only local files.
 
-### Docker Deployment
+## Docker Compose
 
-To build and run using Docker:
+After preparing `backend/models/`, run both services:
 
 ```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+docker compose up --build
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+If your Docker install uses the standalone Compose binary:
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+```bash
+docker-compose up --build
 ```
 
-## Styling
+Frontend: `http://localhost:3000`
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+Backend: `http://localhost:8000`
